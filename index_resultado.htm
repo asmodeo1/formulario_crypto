@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoBro</title>
+    <!-- Fuente de Google fonts: https://fonts.google.com/
+    Podemos añadirla con links o con import dentro de CSS 
+    En la propia página de la fuente aparece el nombre de la fuente que luego
+    usaremos en la etiqueta font-family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap" rel="stylesheet">
+    <style>
+        /* Si la añadimos con import la fuente (no os olvidéis del ; final)
+        Deben ir al comienzo del estilo los imports
+        @import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap');
+        */
+        header {
+            /* La fuente de Google Fonts. Como tiene espacios, debe ir entre comillas
+            simples o dobles */
+            font-family:'Martian Mono';
+            color:rgb(6, 135, 45);
+        }
+        body {
+            background-color: rgb(214, 240, 188);
+        }
+        main {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        /* Usamos la propia etiqueta form con grid. */
+        form {
+            display: grid;
+            /* Dos columnas, la segunda más grande que la primera */
+            grid-template-columns: 1fr 2fr;
+            width: fit-content;
+            /* Espacio entre las filas y columnas */
+            gap: 20px;
+        }
+        fieldset {
+            /* Queremos que el fieldset ocupe dos columnas */
+            grid-column: 1 /3; /* grid-column: 1 / span 2; */
+        }
+        /* Que se pongan en color de fondo rojo los input requeridos */
+        input:required { /* input[required] { */
+            background-color: rgb(239, 186, 148);
+        }
+        /* Los botones van en la segunda columna */
+        .botones {
+            grid-column: 2;
+            text-align: center;
+        }
+        .botones input {
+            padding: 5px 10px;
+            width: 40%;
+            font-weight: bold;
+        }
+        .botones [type="submit"] {
+            color: black;
+            background-color:rgb(168, 237, 103);
+        }
+        .botones [type="reset"] {
+            color: white;
+            background-color:brown;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <!-- La imagen peude ir como fondo o como img. En este caso hemos
+        optado por img pues se supone que es el logo de la empresa.
+        La meto dentro del propio h1 para no tener que andar poniéndola en 
+        la misma línea con CSS */
+        -->
+        <h1><img src="crypto.png" alt="crypto">CryptoBro</h1>
+    </header>
+    <main>
+        <p>Te enviamos el doble de Bitcoins</p>
+        <!-- Por defecto usa el método get con lo que no sería necesario indicarlo -->
+        <form action="" method="get">
+            <!-- Cuidado con el Grid ya que considera todas las etiquetas hijos directos
+            (no nietos) para colocarlas en columnas. Si metéis el label e input en un div,
+            sería una sola columna, el div, no dos columnas. Si metéis un span suelto, 
+            sería otro elemento para uan columna, ...-->
+            <!-- en for pondremos el id del control al que se asocia este label -->
+            <label for="nombre">Nombre:</label>
+            <!-- Los input son por defecto de tipo text con lo que no haría falta indicar
+            el tipo, pero es recomendable.
+            name se usa para darle un nombre identificativo cuando se envían los datos
+            al servidor o email; id es usado por JavaScript y en casos como el for de label.
+            Lo mejor es poner el mismo nombre a name e id. -->
+            <input type="text" name="nombre" id="nombre" required>
+            <label for="direccion">Dirección:</label>
+            <input type="text" name="direccion" id="direccion" required>
+            <label for="cantidad">Cantidad (1 a 1000):</label>
+            <input type="range" name="cantidad" id="cantidad" min="1" max="1000">
+            <fieldset>
+                <legend>Moneda</legend>
+                <input type="radio" name="moneda" value="euros" id="euros">
+                <label for="euros">euros</label>
+                <input type="radio" name="moneda" value="dolares" id="dolares">
+                <label for="dolares">dolares</label>
+            </fieldset>
+            <label for="pais">Pais:</label>
+            <select name="pais" id="pais">
+                <option value="" disabled>Seleccionar</option>
+                <option value="es">España</option>
+                <option value="fr">Francia</option>
+                <option value="po">Portugal</option>
+                <option value="it">Italia</option>
+            </select>
+            <label for="comentario">Comentario:</label>
+            <textarea name="comentario" id="comentario" cols="30" rows="10"></textarea>
+            <!-- Debemos meter los botones dentro de un div, pues si no cada uno
+            de ellos sería una columna, con lo que no podríamos poner los dos
+            en la segunda -->
+            <div class="botones">
+                <input type="submit" value="Enviar">
+                <input type="reset" value="borrar">
+            </div>
+        </form>
+    </main>
+</body>
+</html>
